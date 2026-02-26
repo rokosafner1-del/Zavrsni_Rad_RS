@@ -251,31 +251,6 @@ void TIM7_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
-/*
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-    if (GPIO_Pin == GPIO_PIN_1)
-    {
-        // === PRESS (LOW) ===
-        if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) == GPIO_PIN_RESET)
-        {
-            if (tipkaZakljucana == 0)
-            {
-                tipkaZakljucana = 1;
-                pritisnutaTipka = 1;
-
-                __HAL_TIM_SET_COUNTER(&htim6, 0);
-                HAL_TIM_Base_Start_IT(&htim6);
-            }
-        }
-        // === RELEASE (HIGH) ===
-        else
-        {
-            tipkaZakljucana = 0;
-        }
-    }
-}
-*/
 
 
 
@@ -289,8 +264,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin_)
         global_gpio_pin = GPIO_Pin_;
         __HAL_TIM_CLEAR_IT(&htim6, TIM_IT_UPDATE);
         HAL_TIM_Base_Start_IT(&htim6);
-       // __HAL_TIM_SET_COUNTER(&htim7, 0);      // reset brojača
-        //HAL_TIM_Base_Start(&htim7);
     }
 }
 
@@ -300,24 +273,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		 if (HAL_GPIO_ReadPin(GPIOC, global_gpio_pin) ==GPIO_PIN_RESET)
 			 if (global_gpio_pin == GPIO_PIN_1){
 				 HAL_TIM_Base_Stop_IT(&htim6);
-				 //HAL_GPIO_TogglePin(GPIOH, pritisnutaTipka);
 				 pritisnutaTipka=1;
 			 }
 
 
-		}/*
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-    if (htim->Instance == TIM6)
-    {
-        HAL_TIM_Base_Stop_IT(&htim6);
-    }
-}
-
-
-*/
-
+		
 
 
 
 /* USER CODE END 1 */
+
